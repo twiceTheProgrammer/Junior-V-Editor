@@ -1,0 +1,53 @@
+include "markdown.tis" ;
+include "function.tis" ;
+
+function self.ready() {
+        var cell;
+        var editor;
+        var console;
+
+	      cell = new Element("div");
+	      $(.container).append(cell);
+	      cell.attributes.addClass("cell");
+      	editor = new Element("div");
+      	cell.append(editor);
+      	editor.attributes.addClass("editor");
+      	console = new Element("div");
+      	cell.append(console);
+      	console.attributes.addClass("console");
+
+        self.on("keydown" , function(evt){
+        	if (evt.shiftKey && (evt.keyCode == Event.VK_RETURN)) {
+
+            if ( $(.editor).state.empty == 0  ) {
+               view.msgbox(#information , "Hello there!");
+            }
+            else {
+                console.value = editor.text;
+                $(.container).append("<br>");
+                cell = new Element("div");
+                $(.container).append(cell);
+                cell.attributes.addClass("cell");
+                editor = new Element("div");
+                cell.append(editor);
+                editor.attributes.addClass("editor");
+                console = new Element("div");
+                cell.append(console);
+                console.attributes.addClass("console");
+            }
+
+        		return true;
+        	}
+      });
+      self.on("keydown" , function(evt){
+           if ( evt.shiftKey && (evt.keyCode == Event.VK_M)) {
+                cell.prepend(console);
+                function preview() {
+                    var html = markdown.parse(editor.value);
+                    console.html = html ;
+                }
+                editor.on("change" , preview.debounce(500ms));
+                preview();
+           }
+      });
+};

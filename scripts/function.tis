@@ -1,0 +1,124 @@
+function Function.bind(context , bindargs..) {
+      return function(args..) {
+          if (bindargs.length)
+              return (this super).apply(context , bindargs.concat(args));
+          else
+              return (this super).apply(context , args);
+      };
+}
+function Function.memoize(hasher = null) {
+      assert !hasher || typeof hasher == #function ;
+      var memo = {};
+      return function(args..) {
+           var key = hasher ? hasher.apply(this , args) : args ;
+           var val = memo[key] ;
+           if( val === undefined )
+                memo[key] = val = (this super).apply(this , args);
+            return val ;
+      };
+}
+function Function.partial(pargs..) {
+     return function(args..) {
+          return (this super).apply(this , pargs.concat(args));
+     };
+};
+function Function.delay(milliseconds , args..) {
+     self.timer(milliseconds , :: (this super).apply(null , args) , true) ;
+}
+
+function Function.defer(args..) {
+    var func = this ;
+    self.post( :: func.apply(null , args));
+}
+
+function Function.throttle(milliseconds , options = {}) {
+    var context , args , result ;
+    var running = false ;
+    var previous = 0 ;
+    var func = this ;
+    milliseconds = milliseconds.toInteger();
+
+    function later() {
+         previous = options.leading === false ? 0 : Date.ticks();
+         running = false ;
+         result = func.apply(context , args);
+    };
+    return function(arguements..) {
+         var now = Date.ticks();
+         if (!previous && options.leading === false ) previous = now ;
+         var remaining = milliseconds - ( now - previous) ;
+         context = this ;
+         args = arguements;
+
+         if ( remaining <= 0 ) {
+              self.timer(0 , later , true) ;
+              running = false ;
+              previous = now ;
+              result = func.apply(context , args);
+         }
+         else if ( !running && options.trailing !== false ) {
+              running = true ;
+              self.timer(remaining , later , true );
+         }
+         return result ;
+    };
+}
+
+function Function.debounce(milliseconds , immediate = false ) {
+       var running = false , args , context , timestamp , result ;
+       milliseconds = milliseconds.toInteger();
+       var func = this ;
+       return function(arguements..) {
+            context = this ;
+            args = arguements;
+            timestamp = Date.ticks();
+            var later = function() {
+                  var last = Date.ticks() - timestamp ;
+                  if ( last < milliseconds ) {
+                      running = true ;
+                      self.timer(milliseconds - last , later , true) ;
+                  }
+                  else {
+                      running = false ;
+                      if ( !immediate ) result = func.apply(context , args);
+                  }
+            };
+            var callNow = immediate && !running ;
+            if ( !running ) {
+                running = true ;
+                self.timer(milliseconds , later , true );
+            }
+            if ( callNow) result = func.apply(context , args) ;
+            return result ;
+       };
+}
+function Function.once() {
+      var ran = false , memo ;
+      return function(args..) {
+           if( !ran) {
+                ran = true ;
+                memo = ( this super ).apply(this , args);
+           }
+           return memo ;
+      };
+}
+
+function Function.wrap(wrapper) {
+      return function(arguements..){
+          return wrapper.apply(this , (this super) , arguements);
+      };
+}
+function Function.batch(funcs..) {
+     return function(arguements..) {
+         var args = arguements ;
+         for ( var i = 0 ; i < funcs.length ; ++i ) {
+             if ( typeof args == #array ) {
+                args = funcs[i].apply(this , args);
+             }
+             else {
+                 args = funcs[i].call(this , args);
+             }
+         }
+         return args ;
+     };
+}

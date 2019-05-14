@@ -1,0 +1,21 @@
+/* styles for the popup elements */
+
+popup.info {
+     padding:4dip ;
+     font: system ;
+     background-color:infobackground #FFEFD5 ;
+     width: 220dip ;
+     border: 1px solid chocolate ;
+}
+popup.info p { margin:4dip 0;}
+popup.info .with-divider {
+     margin-top: 0.5em;
+     border-top: 1px dashed chocolate ;
+     padding-top: 0.5em;
+     text-align: center;
+}
+popup.info em {
+     font-weight: bold ;
+     font-style: normal;
+     color:red ;
+}

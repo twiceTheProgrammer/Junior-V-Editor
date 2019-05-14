@@ -1,0 +1,49 @@
+<html window-frame="extended" window-blur-behind="light" theme="light">
+  <head>
+    <title>JD Editor</title>
+    <style >
+         @import url(styles/main.css);
+         @import url(styles/colorizer.css);
+         @import url(styles/md-style.css);
+         /* @import url(styles/flat-theme.css); */
+
+         html > body { margin: 0 ; }
+
+         body > section.n2 { width:0.3*; background:morph(color(back),opacity:0.6);}
+         section.n2 > header {
+              margin:1em ;
+              line-height: 2em;
+              border-bottom: 1dip solid #aaa ;
+         }
+         section.n2 li {
+              display:block ;
+              behavior:radio ;
+              border-left: 0.3em solid transparent ;
+              padding:0.5em 0.5em 0.5em 0.7em ;
+         }
+         section.n2 li:checked {
+             border-color: var(accent , #00f);
+             background-color: morph(color(back) , opacity:0.4);
+         }
+         section.n2 li > caption { font-weight: bold; line-height: 2em ; }
+         section.n2 li:checked > caption { color: var (accent , #00f); }
+         section.n2 li > div { flow:horizontal; border-spacing:0.5em ; }
+    </style>
+  </head>
+  <header>
+     <window-buttons>
+         <window-button role="window-minimize"></window-button>
+         <window-button role="window-maximize"></window-button>
+         <window-button role="window-close"></window-button>
+     </window-buttons>
+  </header>
+  <body>
+       <header>
+          <menubar><include src="menu.htm" /></menubar>
+       </header>
+      <div class="container"></div>
+  </body>
+</html>
+<script type="text/tiscript">
+    include "scripts/keyboard.tis" ;
+</script>

@@ -1,0 +1,12 @@
+
+function readData() {
+
+     var stream = Stream.openFile(self.url("../data/json/data.json") , "ru");
+     if( !stream )
+         return ;
+     return parseData(stream);
+}
+function self.ready() {
+    var data = readData();
+    $(.console).value = JSON.stringify(data , " ");
+}

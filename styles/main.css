@@ -1,0 +1,57 @@
+@const MENU-HILITE-TEXT: #fff ;
+@const MENU-HILITE-BACK: #000 ;
+
+html { background-color: #E8E8E8 ; }
+.container {
+     background-color: #fff;
+     size: * ;
+     border: 1px #E8E8E8 solid ;
+     padding: 10px ;
+     box-shadow: 1px 2px #E8E8E8 ;
+}
+.container .cell {
+     border : 1px gray solid ;
+     border-left-width: 5px ;
+     padding: 10dip 1.5% 15px 10% ;
+}
+.container > .cell:hover ,
+.container  .cell .editor:current {
+    border : 1px green #413CC9;
+    border-left-width: 5px ;
+    padding: 10dip 1.5% 15px 10% ;
+}
+.container .cell .editor {
+     behavior: plaintext ;
+     border: 1px #E8E8E8 solid ;
+     padding: 8dip;
+     font: 12pt monospace ;
+}
+.container .cell .console {
+     font: 12pt system ;
+     padding: 8dip ;
+}
+menubar /* top level menu */
+{
+	font: system; font-rendering-mode:classic ;
+	display:block ;
+	behavior:menu-bar;
+	flow: horizontal ;
+	color: @MENU-TEXT;
+	margin: 0 ;
+}
+
+menubar > li /* menu item in bar */
+{
+	padding: 2px 8px ;
+	margin: 0 ;
+	white-space: nowrap ;
+	width: max-intrinsic;
+	display:block ;
+	flow:horizontal;
+}
+menubar > li:hover ,
+menubar > li:current /* current menu item in menu bar */
+{
+	background-color:@MENU-HILITE-BACK ;
+	color:@MENU-HILITE-TEXT ;
+}
