@@ -282,5 +282,84 @@ toggle { style-set: std-toggle ; }
 
          :root:hover       { @STD-BOX-HOVER ; }
          :root:focus       { @STD-BOX-FOCUS ; }
+         :root:disabled    { @STD-BOX-DISABLED ; }
+         :root:tab-focus   { @STD-BOX-FOCUS ; }
+
+         /* caption portion of combobox */
+         :root > caption {
+             padding:0 0.4em ;
+             min-width:2em;
+             color:inherit;
+             line-height:1.8em;
+         }
+         /* popup select element */
+         :root > popup.list {
+             margin:0;
+             padding:0;
+             border:none ;
+             background: color(popup-panel-back);
+             border:0.14em solid color(border);
+             margin-top:-0.14em;
+         }
+         :root:hover > popup.list { border-color:color(hover-border); }
+         option { padding:02em 0.4em; color: color(text); background:transparent; fill:color(text);}
+         option:current {
+            background-color:color(accent) ;
+            color: color(accent-text);
+            fill: color(accent-text);
+         }
+         option:hover { foreground-color: color(hover-option-cover); }
+         optgroup > caption { font-weight: bold ;}
+         optgroup > option  { padding-left:1em; }
+         optgroup > option:rtl {
+              padding-right:1em;
+              padding-left:0;
+         }
+         /* dropdown button of the combobox */
+         :root > button {
+             display: block ;
+             width  :1.4em ;
+             height :*;
+             padding:0;
+             background:transparent;
+             border:none;
+             foreground-image:url(path:M 0 0 L 5 5 L 10 0); /* that row */
+             fill:none ;
+             stroke-width:1.44dip ;
+             stroke:color(border);
+             foreground-position: 50% 50% ;
+             foreground-repeat: no-repeat ;
+             foreground-size:0.77em 0.38em ;
+         }
+         :root[editable] > caption {
+             background: color(back);
+             text-selection: color(text) transparent ;
+         }
+         :root:not([editable]):empty > caption { @STD-BOX-EMPTY; }
+         :root:owns-popup[editable] > caption,
+         :root[editable] > caption:focus {
+             text-selection: color(accent-text) color(accent);
+         }
+         :root[editable] > button {
+             background: color(button-back);
+             stroke:color(panel-text);
+         }
+         :root[multiple] > popup > option { padding-left:2em; }
+         :root:rtl[multiple] > popup > option { padding-right:2em; padding-left:0em;}
+         :root[multiple] > span.count ;{
+             padding:0 0.14em;
+             margin:0.14em ;
+             border-left:0.07em color(border) solid;
+             border-right:0.07em color(border) solid;
+         }
+    }
+    @set std-hslider < std-slider-base {
+        :root {
+            width:8em;
+            aspect: Flat.HSlider url(flat-them.tis);
+            height:0.14em;
+            background: color(border);
+            background-clip:
+        }
     }
 }
