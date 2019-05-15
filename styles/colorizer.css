@@ -19,7 +19,7 @@
    text[type=markup] { background-color: #FFF ; }
    text[type=style]  { background-color: #FAFFF0 ; }
 }
-plaintext[type] {
+.editor {
     style-set: colorizer ;
 }
 @set element-colorizer {
@@ -43,6 +43,6 @@ plaintext[type] {
      :root::mark(comment) { color: green ; }
 }
 
-pre[type] {
-    style-set: element-colorizer ; 
+.editor {
+    style-set: element-colorizer ;
 }

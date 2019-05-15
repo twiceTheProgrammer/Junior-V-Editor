@@ -19,10 +19,6 @@ function self.ready() {
         self.on("keydown" , function(evt){
         	if (evt.shiftKey && (evt.keyCode == Event.VK_RETURN)) {
 
-            if ( $(.editor).state.empty == 0  ) {
-               view.msgbox(#information , "Hello there!");
-            }
-            else {
                 console.value = editor.text;
                 $(.container).append("<br>");
                 cell = new Element("div");
@@ -34,8 +30,7 @@ function self.ready() {
                 console = new Element("div");
                 cell.append(console);
                 console.attributes.addClass("console");
-            }
-
+        
         		return true;
         	}
       });
